@@ -1,0 +1,80 @@
+.component {
+  display: flex;
+  justify-content: center;
+}
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.row {
+  height: 400px;
+  width: 350px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.row form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 10px;
+}
+.row form input {
+  width: 200px;
+}
+/* button */
+/* From Uiverse.io by arieshiphop */
+.button {
+  font-size: 17px;
+  /* padding: 0.5em 2em; */
+  height: 35px;
+  width: 130px;
+  border: transparent;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background: dodgerblue;
+  color: white;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-left: 36px;
+}
+
+.button:hover {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(30, 144, 255, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.button:active {
+  transform: translate(0em, 0.2em);
+}
+button {
+  cursor: pointer;
+}
+/* table */
+table {
+  height: 250px;
+  width: 700px;
+  border: 2px solid black;
+  text-align: center;
+}
+.trhead {
+  background-color: #a3afc8;
+  border-bottom: 3px solid black;
+}
+td :nth-last-child(1) {
+  background-color: #d0dbe6;
+}
+.lasttable {
+  display: flex;
+  flex-direction: column;
+}
