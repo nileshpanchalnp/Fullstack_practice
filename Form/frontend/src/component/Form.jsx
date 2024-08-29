@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -25,58 +26,59 @@ const Form = () => {
       handleUpdate(editingId);
     } else {
       // Submit new form data
-      fetch("https://53w357tb-4000.inc1.devtunnels.ms/form/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Submission successful:", data);
+      axios
+        .post("https://53w357tb-4000.inc1.devtunnels.ms/form/create", formData)
+        .then((response) => {
+          console.log("Submission successful:", response.data);
           setFormData({ name: "", age: "", email: "" }); // Clear form after submission
           fetchSubmittedData(); // Refresh submitted data
+        })
+        .catch((error) => {
+          console.error("There was an error submitting the form!", error);
         });
     }
   };
 
   const fetchSubmittedData = () => {
-    fetch("https://53w357tb-4000.inc1.devtunnels.ms/form/getform")
-      .then((response) => response.json())
-      .then((data) => {
-        if (Array.isArray(data.data)) {
-          setSubmittedData(data.data);
+    axios
+      .get("https://53w357tb-4000.inc1.devtunnels.ms/form/getform")
+      .then((response) => {
+        if (Array.isArray(response.data.data)) {
+          setSubmittedData(response.data.data);
         }
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data!", error);
       });
   };
 
   const handleDelete = (id) => {
-    fetch(`https://53w357tb-4000.inc1.devtunnels.ms/form/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Deletion successful:", data);
+    axios
+      .delete(`https://53w357tb-4000.inc1.devtunnels.ms/form/delete/${id}`)
+      .then((response) => {
+        console.log("Deletion successful:", response.data);
         fetchSubmittedData(); // Refresh submitted data after deletion
+      })
+      .catch((error) => {
+        console.error("There was an error deleting the data!", error);
       });
   };
 
   const handleUpdate = (id) => {
-    fetch(`https://53w357tb-4000.inc1.devtunnels.ms/form/update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Update successful:", data);
+    axios
+      .put(
+        `https://53w357tb-4000.inc1.devtunnels.ms/form/update/${id}`,
+        formData
+      )
+      .then((response) => {
+        console.log("Update successful:", response.data);
         setIsEditing(false);
         setEditingId(null);
         setFormData({ name: "", age: "", email: "" }); // Clear form after update
         fetchSubmittedData(); // Refresh submitted data after update
+      })
+      .catch((error) => {
+        console.error("There was an error updating the data!", error);
       });
   };
 
